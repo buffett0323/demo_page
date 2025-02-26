@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timbre Encoder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        td, th {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center mt-4">
+        <h2>Simsiam Timbre Encoder: Trained on Swin Transformer</h2>
+    </div>
+
+    <div class="container mt-4" style="max-width: 1000px;">
+        <h4 class="text-center">Audio Outputs</h4>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>Row Name</th>
+                    <th>Testing Audio</th>
+                    <th>KNN-Rank1</th>
+                    <th>KNN-Rank2</th>
+                    <th>KNN-Rank3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        let tableBody = document.querySelector("table tbody");
+                        let audioPaths = [
+                            ["audio/testing_1.wav", "audio/knn_rank1_1.wav", "audio/knn_rank2_1.wav", "audio/knn_rank3_1.wav"],
+                            ["audio/testing_2.wav", "audio/knn_rank1_2.wav", "audio/knn_rank2_2.wav", "audio/knn_rank3_2.wav"],
+                            ["audio/testing_3.wav", "audio/knn_rank1_3.wav", "audio/knn_rank2_3.wav", "audio/knn_rank3_3.wav"],
+                            ["audio/testing_4.wav", "audio/knn_rank1_4.wav", "audio/knn_rank2_4.wav", "audio/knn_rank3_4.wav"],
+                            ["audio/testing_5.wav", "audio/knn_rank1_5.wav", "audio/knn_rank2_5.wav", "audio/knn_rank3_5.wav"]
+                        ];
+                        
+                        for (let i = 0; i < 5; i++) { // 5 rows
+                            let row = document.createElement("tr");
+                            let rowNameCell = document.createElement("td");
+                            rowNameCell.textContent = "Row " + (i + 1);
+                            row.appendChild(rowNameCell);
+                            
+                            for (let j = 0; j < 4; j++) { // 4 columns
+                                let cell = document.createElement("td");
+                                cell.innerHTML = `
+                                    <audio controls>
+                                        <source src="${audioPaths[i][j]}" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                `;
+                                row.appendChild(cell);
+                            }
+                            tableBody.appendChild(row);
+                        }
+                    });
+                </script>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
