@@ -15,11 +15,23 @@
             padding: 10px;
             text-align: center;
         }
+        .img-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .img-container img {
+            max-width: 80%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 <body>
     <div class="text-center mt-4">
-        <h2>Simsiam Timbre Encoder: Trained on Swin Transformer</h2>
+        <h2>Simsiam Timbre Encoder: Trained on Resnet 50</h2>
     </div>
 
     <div class="container mt-4" style="max-width: 1000px;">
@@ -56,7 +68,7 @@
                                 let cell = document.createElement("td");
                                 cell.innerHTML = `
                                     <audio controls>
-                                        <source src="${audioPaths[i][j]}" type="audio/wav">
+                                        <source src="${audioPaths[i][j]}" type="audio/mp3">
                                         Your browser does not support the audio element.
                                     </audio>
                                 `;
@@ -68,6 +80,12 @@
                 </script>
             </tbody>
         </table>
+
+        <!-- Image for training loss -->
+        <div class="img-container">
+            <h4>Training Loss Figure</h4>
+            <img src="imgs/train_res.png" alt="Training Loss Graph">
+        </div>
     </div>
 </body>
 </html>
