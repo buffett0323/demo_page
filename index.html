@@ -14,6 +14,21 @@
             border: 1px solid #ccc;
             padding: 10px;
             text-align: center;
+            vertical-align: middle;
+        }
+        .description-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+        .audio-description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
         }
         .img-container {
             text-align: center;
@@ -30,8 +45,18 @@
     </style>
 </head>
 <body>
-    <div class="text-center mt-4">
+    <!-- Task Description -->
+    <div class="description-container">
         <h2>Simsiam Timbre Encoder: Trained on Resnet 50</h2>
+        <p>
+            This experiment evaluates a self-supervised timbre encoder trained using the SimSiam framework with a ResNet-50 backbone. 
+            The dataset consists of 75,000 tracks from the Beatport EDM dataset, where I used the All-In-One model to extract the chorus sections and apply source separation. 
+            To focus on lead sounds, I specifically utilized the “other” stem from the VBDO settings, as it typically contains the main melodic elements in EDM music. 
+            The model was trained with a contrastive loss function and evaluated on a timbre similarity search task.
+        </p>
+        <p>
+            Below, you can listen to the testing audio clips and compare them with their top-3 most similar matches retrieved from the dataset.
+        </p>
     </div>
 
     <div class="container mt-4" style="max-width: 1000px;">
@@ -57,11 +82,20 @@
                             ["audio/s4_target.mp3", "audio/s4_top1.mp3", "audio/s4_top2.mp3", "audio/s4_top3.mp3"],
                             ["audio/s5_target.mp3", "audio/s5_top1.mp3", "audio/s5_top2.mp3", "audio/s5_top3.mp3"]
                         ];
-                        
+                        let descriptions = [
+                            ["", "Same song", "Similar Timbre", "Similar Timbre"],
+                            ["", "Similar Wobble sound", "Similar Wobble sound", "Similar Wobble sound"],
+                            ["", "Same song", "Similar sound but different content", "Similar sound but different content"],
+                            ["", "Same song", "Similar Bass-House like Timbre", "Similar Bass-House like Timbre"],
+                            ["", "Same song", "Big-room like Lead", "Big-room like Lead"]
+                        ];
+                        let rowname = [
+                            "Normal Lead", "Dubstep", "Plugs", "Bass House", "Electro House/ Big Room"
+                        ];
                         for (let i = 0; i < 5; i++) { // 5 rows
                             let row = document.createElement("tr");
                             let rowNameCell = document.createElement("td");
-                            rowNameCell.textContent = "Row " + (i + 1);
+                            rowNameCell.textContent = rowname[i];
                             row.appendChild(rowNameCell);
                             
                             for (let j = 0; j < 4; j++) { // 4 columns
@@ -71,6 +105,7 @@
                                         <source src="${audioPaths[i][j]}" type="audio/mp3">
                                         Your browser does not support the audio element.
                                     </audio>
+                                    <div class="audio-description">${descriptions[i][j]}</div>
                                 `;
                                 row.appendChild(cell);
                             }
@@ -84,7 +119,7 @@
         <!-- Image for training loss -->
         <div class="img-container">
             <h4>Training Loss Figure</h4>
-            <img src="imgs/train_res.png" alt="Training Loss Graph">
+            <img src="img/train_res.png" alt="Training Loss Graph">
         </div>
     </div>
 </body>
