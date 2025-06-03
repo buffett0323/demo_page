@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Codes/', // Replace 'Codes' with your repository name
+  base: 'demo_page',
   server: {
     port: 3000,
   },
