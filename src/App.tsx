@@ -43,7 +43,8 @@ function App() {
             </h1>
           </div>
           <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-            Compare audio samples with reference, conversion results, and ground truth recordings
+            Compare audio samples with reference, conversion results, and ground truth recordings.
+            Further details and codecan be found in the <a href="https://github.com/buffett0323/query_ss.git" className="text-black hover:underline">Buffett's GitHub repository</a>
           </p>
         </div>
 
