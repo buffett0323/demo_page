@@ -6,6 +6,14 @@ export interface AudioSample {
   conversion: string;
   groundTruth: string;
   midiPng: string;
+  metadata?: {
+    stft_loss: number;
+    mel_loss: number;
+    l1_loss: number;
+    content_loss: number;
+    vq_commitment_loss?: number;
+    vq_codebook_loss?: number;
+  };
 }
 
 export interface AppConfig {
