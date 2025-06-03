@@ -1,23 +1,24 @@
 import { AudioSample, AppConfig } from '../types/audio';
 
 export const config: AppConfig = {
-  totalRows: 15,
-  sampleDirectory: 'sample/',
+  totalRows: 20,
+  audioDirectory: 'audio/',
+  imgDirectory: 'img/',
   fileExtension: '.wav'
 };
 
 export function generateSampleData(): AudioSample[] {
   const samples: AudioSample[] = [];
   
-  for (let i = 1; i <= config.totalRows; i++) {
-    const paddedNumber = i.toString().padStart(2, '0');
-    
+  for (let i = 0; i < config.totalRows; i++) {
     samples.push({
-      id: i,
-      content: `Sample Content ${i}`,
-      timbreRef: `${config.sampleDirectory}timbre_ref_${paddedNumber}${config.fileExtension}`,
-      conversion: `${config.sampleDirectory}conversion_${paddedNumber}${config.fileExtension}`,
-      groundTruth: `${config.sampleDirectory}ground_truth_${paddedNumber}${config.fileExtension}`
+      id: i + 1,
+      content: `Sample ${i}`,
+      contentRef: `${config.audioDirectory}sample_${i}_content_ref${config.fileExtension}`,
+      timbreRef: `${config.audioDirectory}sample_${i}_timbre_ref${config.fileExtension}`,
+      conversion: `${config.audioDirectory}sample_${i}_recon${config.fileExtension}`,
+      groundTruth: `${config.audioDirectory}sample_${i}_gt${config.fileExtension}`,
+      midiPng: `${config.imgDirectory}sample_${i}.png`
     });
   }
   
@@ -33,15 +34,16 @@ export function updateSampleContent(samples: AudioSample[], rowId: number, newCo
 }
 
 export function addNewSample(samples: AudioSample[], content: string): AudioSample[] {
-  const newId = samples.length + 1;
-  const paddedNumber = newId.toString().padStart(2, '0');
+  const newId = samples.length;
   
   const newSample: AudioSample = {
-    id: newId,
+    id: newId + 1,
     content: content,
-    timbreRef: `${config.sampleDirectory}timbre_ref_${paddedNumber}${config.fileExtension}`,
-    conversion: `${config.sampleDirectory}conversion_${paddedNumber}${config.fileExtension}`,
-    groundTruth: `${config.sampleDirectory}ground_truth_${paddedNumber}${config.fileExtension}`
+    contentRef: `${config.audioDirectory}sample_${newId}_content_ref${config.fileExtension}`,
+    timbreRef: `${config.audioDirectory}sample_${newId}_timbre_ref${config.fileExtension}`,
+    conversion: `${config.audioDirectory}sample_${newId}_recon${config.fileExtension}`,
+    groundTruth: `${config.audioDirectory}sample_${newId}_gt${config.fileExtension}`,
+    midiPng: `${config.imgDirectory}sample_${newId}.png`
   };
 
   return [...samples, newSample];
