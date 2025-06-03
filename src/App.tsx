@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Headphones, Music } from 'lucide-react';
 import AudioTable from './components/AudioTable';
-import { generateSampleData } from './utils/audioUtils';
+import { generateSampleData, generateTestData } from './utils/audioUtils';
 import { AudioSample } from './types/audio';
 
 function App() {
   const [samples, setSamples] = useState<AudioSample[]>([]);
+  const [testSamples, setTestSamples] = useState<AudioSample[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Simulate loading time for better UX
     const timer = setTimeout(() => {
       setSamples(generateSampleData());
+      setTestSamples(generateTestData());
       setLoading(false);
     }, 500);
 
@@ -49,8 +51,22 @@ function App() {
         </div>
 
         {/* Main Table Container */}
-        <div>
-          <AudioTable samples={samples} />
+        <div className="space-y-16">
+          {/* Original Results Table */}
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-6 text-center">
+              Validation Results
+            </h2>
+            <AudioTable samples={samples} />
+          </div>
+
+          {/* Testing Results Table */}
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-6 text-center">
+              Testing Results
+            </h2>
+            <AudioTable samples={testSamples} />
+          </div>
         </div>
 
         {/* Footer */}
