@@ -2,6 +2,7 @@
   "name": "audio-evaluation-app",
   "version": "1.0.0",
   "description": "Audio Listening Evaluation Table with React TypeScript and Tailwind CSS",
+  "homepage": "https://buffett0323.github.io/demo_page/",
   "private": true,
   "type": "module",
   "scripts": {
