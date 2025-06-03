@@ -1,88 +1,341 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sample Audio Grid</title>
+  <title>Audio Listening Table</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f7fa;
-      padding: 40px 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
     }
 
-    .audio-grid-container {
-      max-width: 1200px;
+    .container-fluid {
+      max-width: 1400px;
       margin: 0 auto;
-      background-color: white;
+    }
+
+    .audio-table-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
       margin-bottom: 30px;
-      font-weight: 600;
-      color: #1a365d;
     }
 
-    .audio-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-    }
-
-    .audio-block {
+    .page-title {
       text-align: center;
-      font-size: 0.9rem;
+      margin-bottom: 40px;
+      color: #2d3748;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .audio-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .audio-table thead th {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px 15px;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+    }
+
+    .audio-table thead th:first-child {
+      border-top-left-radius: 15px;
+    }
+
+    .audio-table thead th:last-child {
+      border-top-right-radius: 15px;
+    }
+
+    .audio-table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    .audio-table tbody tr:hover {
+      background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .audio-table tbody td {
+      padding: 20px 15px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+
+    .audio-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .content-cell {
+      background: linear-gradient(135deg, #fff5ee 0%, #ffe4e1 100%);
+      font-weight: 600;
+      color: #2d3748;
+      border-right: 1px solid #e2e8f0;
+    }
+
+    .audio-cell {
+      position: relative;
+      padding: 15px;
+    }
+
+    .audio-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .audio-label {
+      font-size: 0.85rem;
+      color: #4a5568;
+      font-weight: 500;
+      margin-bottom: 8px;
     }
 
     audio {
       width: 100%;
+      max-width: 250px;
+      height: 40px;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    audio::-webkit-media-controls-panel {
+      background-color: #f7fafc;
+      border-radius: 8px;
+    }
+
+    .row-number {
+      background: linear-gradient(135deg, #9f7aea 0%, #667eea 100%);
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      width: 60px;
+      text-align: center;
+    }
+
+    .loading-placeholder {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 50%;
+      border-top-color: #4facfe;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .status-indicator {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 8px;
+      height: 8px;
+      background: #48bb78;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 1; }
+      70% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(0.95); opacity: 1; }
     }
 
     @media (max-width: 768px) {
-      .audio-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .audio-table-container {
+        padding: 15px;
+        margin: 10px;
       }
+      
+      .page-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+      
+      .audio-table thead th,
+      .audio-table tbody td {
+        padding: 10px 8px;
+        font-size: 0.9rem;
+      }
+      
+      audio {
+        max-width: 150px;
+        height: 35px;
+      }
+    }
+
+    .footer-info {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 20px;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <div class="audio-grid-container">
-    <h2>Sample Audio Grid (5x5)</h2>
-    <div class="audio-grid">
-      <!-- Add 25 audio blocks -->
-      <div class="audio-block"><div>BA. Backbeat.106680</div><audio controls src="sample/BA. Backbeat.106680.wav"></audio></div>
-      <div class="audio-block"><div>BA. Backbeat.112420</div><audio controls src="sample/BA. Backbeat.112420.wav"></audio></div>
-      <div class="audio-block"><div>BA. Backbeat.114509</div><audio controls src="sample/BA. Backbeat.114509.wav"></audio></div>
-      <div class="audio-block"><div>BA. Backbeat.118496</div><audio controls src="sample/BA. Backbeat.118496.wav"></audio></div>
-      <div class="audio-block"><div>BA. Backbeat.123428</div><audio controls src="sample/BA. Backbeat.123428.wav"></audio></div>
-
-      <div class="audio-block"><div>BA. Lights Off.106680</div><audio controls src="sample/BA. Lights Off.106680.wav"></audio></div>
-      <div class="audio-block"><div>BA. Lights Off.112420</div><audio controls src="sample/BA. Lights Off.112420.wav"></audio></div>
-      <div class="audio-block"><div>BA. Lights Off.114509</div><audio controls src="sample/BA. Lights Off.114509.wav"></audio></div>
-      <div class="audio-block"><div>BA. Lights Off.118496</div><audio controls src="sample/BA. Lights Off.118496.wav"></audio></div>
-      <div class="audio-block"><div>BA. Lights Off.123428</div><audio controls src="sample/BA. Lights Off.123428.wav"></audio></div>
-
-      <div class="audio-block"><div>BA. Moov.106680</div><audio controls src="sample/BA. Moov.106680.wav"></audio></div>
-      <div class="audio-block"><div>BA. Moov.112420</div><audio controls src="sample/BA. Moov.112420.wav"></audio></div>
-      <div class="audio-block"><div>BA. Moov.114509</div><audio controls src="sample/BA. Moov.114509.wav"></audio></div>
-      <div class="audio-block"><div>BA. Moov.118496</div><audio controls src="sample/BA. Moov.118496.wav"></audio></div>
-      <div class="audio-block"><div>BA. Moov.123428</div><audio controls src="sample/BA. Moov.123428.wav"></audio></div>
-
-      <div class="audio-block"><div>BA. RESOlution.106680</div><audio controls src="sample/BA. RESOlution.106680.wav"></audio></div>
-      <div class="audio-block"><div>BA. RESOlution.112420</div><audio controls src="sample/BA. RESOlution.112420.wav"></audio></div>
-      <div class="audio-block"><div>BA. RESOlution.114509</div><audio controls src="sample/BA. RESOlution.114509.wav"></audio></div>
-      <div class="audio-block"><div>BA. RESOlution.118496</div><audio controls src="sample/BA. RESOlution.118496.wav"></audio></div>
-      <div class="audio-block"><div>BA. RESOlution.123428</div><audio controls src="sample/BA. RESOlution.123428.wav"></audio></div>
-
-      <div class="audio-block"><div>LD. Beyond Insanity.106680</div><audio controls src="sample/LD. Beyond Insanity.106680.wav"></audio></div>
-      <div class="audio-block"><div>LD. Beyond Insanity.112420</div><audio controls src="sample/LD. Beyond Insanity.112420.wav"></audio></div>
-      <div class="audio-block"><div>LD. Beyond Insanity.114509</div><audio controls src="sample/LD. Beyond Insanity.114509.wav"></audio></div>
-      <div class="audio-block"><div>LD. Beyond Insanity.118496</div><audio controls src="sample/LD. Beyond Insanity.118496.wav"></audio></div>
-      <div class="audio-block"><div>LD. Beyond Insanity.123428</div><audio controls src="sample/LD. Beyond Insanity.123428.wav"></audio></div>
+  <div class="container-fluid">
+    <div class="audio-table-container">
+      <h1 class="page-title">
+        <i class="fas fa-music"></i> Audio Listening Evaluation Table
+      </h1>
+      
+      <div class="table-responsive">
+        <table class="audio-table">
+          <thead>
+            <tr>
+              <th class="row-number">#</th>
+              <th><i class="fas fa-file-audio"></i> Content</th>
+              <th><i class="fas fa-waveform"></i> Timbre Reference</th>
+              <th><i class="fas fa-exchange-alt"></i> Conversion Result</th>
+              <th><i class="fas fa-check-circle"></i> Ground Truth</th>
+            </tr>
+          </thead>
+          <tbody id="audio-table-body">
+            <!-- Rows will be generated by TypeScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="footer-info">
+      <i class="fas fa-headphones"></i> Audio Listening Evaluation • Use headphones for best experience
     </div>
   </div>
+
+  <script>
+    // TypeScript-like code (compiled to JavaScript)
+    
+    // Configuration
+    const config = {
+      totalRows: 15,
+      sampleDirectory: 'sample/',
+      fileExtension: '.wav'
+    };
+
+    // Generate sample data
+    function generateSampleData() {
+      const samples = [];
+      
+      for (let i = 1; i <= config.totalRows; i++) {
+        const paddedNumber = i.toString().padStart(2, '0');
+        
+        samples.push({
+          id: i,
+          content: `Sample Content ${i}`,
+          timbreRef: `${config.sampleDirectory}timbre_ref_${paddedNumber}${config.fileExtension}`,
+          conversion: `${config.sampleDirectory}conversion_${paddedNumber}${config.fileExtension}`,
+          groundTruth: `${config.sampleDirectory}ground_truth_${paddedNumber}${config.fileExtension}`
+        });
+      }
+      
+      return samples;
+    }
+
+    // Create audio element with wrapper
+    function createAudioElement(src, label) {
+      return `
+        <div class="audio-wrapper">
+          <div class="audio-label">${label}</div>
+          <audio controls>
+            <source src="${src}" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      `;
+    }
+
+    // Generate table row HTML
+    function generateTableRow(sample) {
+      return `
+        <tr>
+          <td class="row-number">${sample.id}</td>
+          <td class="content-cell">${sample.content}</td>
+          <td class="audio-cell">
+            ${createAudioElement(sample.timbreRef, 'Reference Audio')}
+          </td>
+          <td class="audio-cell">
+            ${createAudioElement(sample.conversion, 'Converted Audio')}
+          </td>
+          <td class="audio-cell">
+            ${createAudioElement(sample.groundTruth, 'Ground Truth')}
+          </td>
+        </tr>
+      `;
+    }
+
+    // Initialize the table
+    function initializeTable() {
+      const tableBody = document.getElementById('audio-table-body');
+      if (!tableBody) {
+        console.error('Table body element not found');
+        return;
+      }
+
+      const samples = generateSampleData();
+      const tableHTML = samples.map(generateTableRow).join('');
+      tableBody.innerHTML = tableHTML;
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', initializeTable);
+
+    // Utility functions for dynamic updates
+    function updateSampleContent(rowId, newContent) {
+      const contentCell = document.querySelector(`tr:nth-child(${rowId}) .content-cell`);
+      if (contentCell) {
+        contentCell.textContent = newContent;
+      }
+    }
+
+    function addNewRow(content) {
+      const tableBody = document.getElementById('audio-table-body');
+      if (!tableBody) return;
+
+      const newId = tableBody.children.length + 1;
+      const paddedNumber = newId.toString().padStart(2, '0');
+      
+      const newSample = {
+        id: newId,
+        content: content,
+        timbreRef: `${config.sampleDirectory}timbre_ref_${paddedNumber}${config.fileExtension}`,
+        conversion: `${config.sampleDirectory}conversion_${paddedNumber}${config.fileExtension}`,
+        groundTruth: `${config.sampleDirectory}ground_truth_${paddedNumber}${config.fileExtension}`
+      };
+
+      tableBody.innerHTML += generateTableRow(newSample);
+    }
+
+    // Export functions for external use
+    window.audioTableUtils = {
+      updateSampleContent,
+      addNewRow,
+      generateSampleData,
+      config
+    };
+  </script>
 </body>
 </html>
