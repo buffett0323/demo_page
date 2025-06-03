@@ -39,7 +39,7 @@ function App() {
               <Music className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
-              Audio Listening Evaluation
+            EDM Timbre Transfer Validation
             </h1>
           </div>
           <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
