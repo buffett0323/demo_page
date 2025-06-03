@@ -57,12 +57,12 @@ function App() {
           <div className="flex items-center justify-center gap-2 text-white/80">
             <Headphones className="w-5 h-5" />
             <span className="text-lg font-medium">
-              Audio Listening Evaluation • Use headphones for the best experience
+            EDM Timbre Transfer Validation • Use headphones for the best experience
             </span>
           </div>
           <div className="mt-4 text-white/60">
             <p className="text-sm">
-              Built with React, TypeScript, and Tailwind CSS
+              Built by Buffett Liu
             </p>
           </div>
         </div>
