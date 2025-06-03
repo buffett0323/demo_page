@@ -2,6 +2,8 @@
 
 A modern, responsive audio evaluation interface built with React, TypeScript, and Tailwind CSS. This application provides an elegant table for comparing audio samples with reference recordings, conversion results, and ground truth data.
 
+🔗 **Live Demo**: [https://buffett0323.github.io/demo_page/](https://buffett0323.github.io/demo_page/)
+
 ## ✨ Features
 
 - **Modern React TypeScript Architecture**: Built with React 18 and TypeScript for type safety and better developer experience
@@ -88,6 +90,25 @@ To preview the production build locally:
 ```bash
 npm run preview
 ```
+
+## 🚀 Deployment
+
+This project is configured for automatic deployment to GitHub Pages. When you push to the main branch, GitHub Actions will automatically build and deploy the site.
+
+### Manual Deployment
+
+You can also deploy manually using:
+
+```bash
+npm run deploy
+```
+
+### GitHub Pages Setup
+
+1. Go to your repository settings
+2. Navigate to "Pages" in the sidebar
+3. Set the source to "GitHub Actions"
+4. Push to the main branch to trigger deployment
 
 ## 🎵 Audio Sample Setup
 
