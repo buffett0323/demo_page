@@ -1,5 +1,8 @@
 import { AudioSample, AppConfig } from '../types/audio';
-import metadata from '../metadata.json';
+// @ts-ignore
+import metadataJson from '../metadata.json';
+
+const metadata = metadataJson as Record<string, any>;
 
 export const config: AppConfig = {
   totalRows: 20,
