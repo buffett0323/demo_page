@@ -60,25 +60,25 @@ const AudioTable: React.FC<AudioTableProps> = ({ samples }) => {
                   Ground Truth
                 </div>
               </th>
-              <th className="px-4 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+              <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[140px]">
                 <div className="flex items-center justify-center gap-2">
                   <BarChart3 className="w-4 h-4" />
                   STFT Loss
                 </div>
               </th>
-              <th className="px-4 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+              <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[140px]">
                 <div className="flex items-center justify-center gap-2">
                   <Activity className="w-4 h-4" />
                   Mel Loss
                 </div>
               </th>
-              <th className="px-4 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+              <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[140px]">
                 <div className="flex items-center justify-center gap-2">
                   <Target className="w-4 h-4" />
                   L1 Loss
                 </div>
               </th>
-              <th className="px-4 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+              <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[140px]">
                 <div className="flex items-center justify-center gap-2">
                   <Brain className="w-4 h-4" />
                   Content Loss
@@ -136,23 +136,23 @@ const AudioTable: React.FC<AudioTableProps> = ({ samples }) => {
                     className="transform transition-transform group-hover:scale-105"
                   />
                 </td>
-                <td className="px-4 py-6 text-center">
-                  <div className={`px-3 py-2 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 ${getLossColor(sample.metadata?.stft_loss, 5)}`}>
+                <td className="px-8 py-6 text-center">
+                  <div className={`px-4 py-3 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 min-w-[120px] ${getLossColor(sample.metadata?.stft_loss, 5)}`}>
                     {formatLoss(sample.metadata?.stft_loss)}
                   </div>
                 </td>
-                <td className="px-4 py-6 text-center">
-                  <div className={`px-3 py-2 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-green-50 to-green-100 border border-green-200 ${getLossColor(sample.metadata?.mel_loss, 5)}`}>
+                <td className="px-8 py-6 text-center">
+                  <div className={`px-4 py-3 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-green-50 to-green-100 border border-green-200 min-w-[120px] ${getLossColor(sample.metadata?.mel_loss, 5)}`}>
                     {formatLoss(sample.metadata?.mel_loss)}
                   </div>
                 </td>
-                <td className="px-4 py-6 text-center">
-                  <div className={`px-3 py-2 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 ${getLossColor(sample.metadata?.l1_loss, 1)}`}>
+                <td className="px-8 py-6 text-center">
+                  <div className={`px-4 py-3 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 min-w-[120px] ${getLossColor(sample.metadata?.l1_loss, 1)}`}>
                     {formatLoss(sample.metadata?.l1_loss)}
                   </div>
                 </td>
-                <td className="px-4 py-6 text-center">
-                  <div className={`px-3 py-2 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 ${getLossColor(sample.metadata?.content_loss, 100)}`}>
+                <td className="px-8 py-6 text-center">
+                  <div className={`px-4 py-3 rounded-lg font-mono text-sm font-semibold bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 min-w-[120px] ${getLossColor(sample.metadata?.content_loss, 100)}`}>
                     {formatLoss(sample.metadata?.content_loss)}
                   </div>
                 </td>
