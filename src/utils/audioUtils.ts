@@ -8,7 +8,7 @@ const metadata = metadataJson as Record<string, any>;
 const testMetadata = testMetadataJson as Record<string, any>;
 
 export const config: AppConfig = {
-  totalRows: 20,
+  totalRows: 10,
   audioDirectory: 'audio/',
   imgDirectory: 'img/',
   fileExtension: '.wav'
