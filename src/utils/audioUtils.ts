@@ -21,6 +21,59 @@ export const testConfig: AppConfig = {
   fileExtension: '.wav'
 };
 
+export interface Iter286000Sample {
+  id: number;
+  conv_adsr: {
+    gt: string;
+    orig: string;
+    ref: string;
+    recon: string;
+  };
+  conv_both: {
+    gt: string;
+    orig: string;
+    ref: string;
+    recon: string;
+  };
+  conv_timbre: {
+    gt: string;
+    orig: string;
+    ref: string;
+    recon: string;
+  };
+}
+
+export function generateIter286000Data(): Iter286000Sample[] {
+  const samples: Iter286000Sample[] = [];
+  const basePath = 'iter_286000';
+  
+  for (let i = 0; i < 8; i++) {
+    samples.push({
+      id: i,
+      conv_adsr: {
+        gt: `${basePath}/conv_adsr/${i}_gt.wav`,
+        orig: `${basePath}/conv_adsr/${i}_orig.wav`,
+        ref: `${basePath}/conv_adsr/${i}_ref.wav`,
+        recon: `${basePath}/conv_adsr/${i}_recon.wav`,
+      },
+      conv_both: {
+        gt: `${basePath}/conv_both/${i}_gt.wav`,
+        orig: `${basePath}/conv_both/${i}_orig.wav`,
+        ref: `${basePath}/conv_both/${i}_ref.wav`,
+        recon: `${basePath}/conv_both/${i}_recon.wav`,
+      },
+      conv_timbre: {
+        gt: `${basePath}/conv_timbre/${i}_gt.wav`,
+        orig: `${basePath}/conv_timbre/${i}_orig.wav`,
+        ref: `${basePath}/conv_timbre/${i}_ref.wav`,
+        recon: `${basePath}/conv_timbre/${i}_recon.wav`,
+      },
+    });
+  }
+  
+  return samples;
+}
+
 export function generateSampleData(): AudioSample[] {
   const samples: AudioSample[] = [];
   
