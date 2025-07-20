@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Headphones, Music, ArrowLeft, Sparkles } from 'lucide-react';
+import { Headphones, Music, ArrowLeft, Sparkles, Zap } from 'lucide-react';
 import AudioTable from './components/AudioTable';
 import Iter286000Table from './components/Iter286000Table';
-import { generateSampleData, generateTestData, generateIter286000Data, Iter286000Sample } from './utils/audioUtils';
+import Iter140000Table from './components/Iter140000Table';
+import { generateSampleData, generateTestData, generateIter286000Data, generateIter140000Data, Iter286000Sample, Iter140000Sample } from './utils/audioUtils';
 import { AudioSample } from './types/audio';
 
 function App() {
   const [samples, setSamples] = useState<AudioSample[]>([]);
   const [testSamples, setTestSamples] = useState<AudioSample[]>([]);
   const [iter286000Samples, setIter286000Samples] = useState<Iter286000Sample[]>([]);
+  const [iter140000Samples, setIter140000Samples] = useState<Iter140000Sample[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<'main' | 'old' | 'new'>('main');
+  const [currentPage, setCurrentPage] = useState<'main' | 'old' | 'new' | 'iter140000'>('main');
 
   useEffect(() => {
     // Simulate loading time for better UX
@@ -18,6 +20,7 @@ function App() {
       setSamples(generateSampleData());
       setTestSamples(generateTestData());
       setIter286000Samples(generateIter286000Data());
+      setIter140000Samples(generateIter140000Data());
       setLoading(false);
     }, 500);
 
@@ -56,7 +59,7 @@ function App() {
           </div>
 
           {/* Page Selection Cards */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
             {/* Old Page Card */}
             <div 
               className="bg-gradient-to-br from-blue-500/30 to-purple-600/30 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-blue-400/50 backdrop-blur-sm"
@@ -103,6 +106,31 @@ function App() {
                     • Audio comparison tables<br/>
                     • Interactive category switching<br/>
                     • Ground truth comparison
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Iter 140000 Page Card */}
+            <div 
+              className="bg-gradient-to-br from-orange-500/30 to-red-600/30 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-orange-400/50 backdrop-blur-sm"
+              onClick={() => setCurrentPage('iter140000')}
+            >
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Zap className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">0720 Ablation Study</h3>
+                <p className="text-white/80 mb-6 leading-relaxed">
+                  This is an ablation study for directly adding the ADSR to the content without any onset matching.
+                </p>
+                <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-lg p-4 border border-orange-400/30">
+                  <p className="text-white text-sm font-medium">
+                    <strong className="text-white">Features:</strong><br/>
+                    • Audio comparison tables<br/>
+                    • Interactive category switching<br/>
+                    • Ground truth comparison<br/>
+                    • Audio Waveform Visualization
                   </p>
                 </div>
               </div>
@@ -235,6 +263,62 @@ function App() {
           {/* Main Table Container */}
           <div className="space-y-16">
             <Iter286000Table samples={iter286000Samples} />
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-12">
+            <div className="flex items-center justify-center gap-2 text-white/80">
+              <Headphones className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                Audio Synthesizer Style Transfer • Use headphones for the best experience
+              </span>
+            </div>
+            <div className="mt-4 text-white/60">
+              <p className="text-sm">
+                Built by Buffett Liu
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Iter 140000 page
+  if (currentPage === 'iter140000') {
+    return (
+      <div className="min-h-screen gradient-bg">
+        <div className="container mx-auto px-4 py-8 max-w-7xl">
+          {/* Back Button */}
+          <div className="mb-6">
+            <button
+              onClick={() => setCurrentPage('main')}
+              className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200 group"
+            >
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-lg font-medium">Back to Main Menu</span>
+            </button>
+          </div>
+
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
+                <Zap className="w-8 h-8 text-white" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
+                Iteration 140000 Results
+              </h1>
+            </div>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+              Compare audio samples across different conversion methods: ADSR, Both, and Timbre conversions.
+              Each sample includes original, reference, reconstruction, and ground truth audio files.
+            </p>
+          </div>
+
+          {/* Main Table Container */}
+          <div className="space-y-16">
+            <Iter140000Table samples={iter140000Samples} />
           </div>
 
           {/* Footer */}

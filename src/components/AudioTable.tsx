@@ -47,25 +47,25 @@ const AudioTable: React.FC<AudioTableProps> = ({ samples }) => {
                     Content
                   </div>
                 </th>
-                <th className="px-6 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+                <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[220px]">
                   <div className="flex items-center justify-center gap-2">
                     <Music className="w-4 h-4" />
                     Content Reference
                   </div>
                 </th>
-                <th className="px-6 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+                <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[220px]">
                   <div className="flex items-center justify-center gap-2">
                     <Music className="w-4 h-4" />
                     Timbre Reference
                   </div>
                 </th>
-                <th className="px-6 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+                <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[220px]">
                   <div className="flex items-center justify-center gap-2">
                     <RefreshCw className="w-4 h-4" />
                     Conversion Result
                   </div>
                 </th>
-                <th className="px-6 py-4 text-center font-semibold text-sm uppercase tracking-wider">
+                <th className="px-8 py-4 text-center font-semibold text-sm uppercase tracking-wider min-w-[220px]">
                   <div className="flex items-center justify-center gap-2">
                     <CheckCircle className="w-4 h-4" />
                     Ground Truth

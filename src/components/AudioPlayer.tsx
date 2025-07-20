@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { AudioPlayerProps } from '../types/audio';
+import AudioWaveform from './AudioWaveform';
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, label, className = '' }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -85,6 +86,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, label, className = '' })
       </div>
       
       <div className="w-full bg-white rounded-lg p-3 shadow-md border border-gray-200">
+        {/* Waveform Visualization */}
+        <div className="mb-3">
+          <AudioWaveform 
+            src={src} 
+            width={180} 
+            height={40} 
+            className="mx-auto"
+          />
+        </div>
+
         {/* Custom Controls */}
         <div className="flex items-center gap-2 mb-2">
           <button

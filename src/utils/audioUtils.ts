@@ -43,6 +43,28 @@ export interface Iter286000Sample {
   };
 }
 
+export interface Iter140000Sample {
+  id: number;
+  conv_adsr: {
+    gt: string;
+    orig: string;
+    ref: string;
+    recon: string;
+  };
+  conv_both: {
+    gt: string;
+    orig: string;
+    ref: string;
+    recon: string;
+  };
+  conv_timbre: {
+    gt: string;
+    orig: string;
+    ref: string;
+    recon: string;
+  };
+}
+
 export function generateIter286000Data(): Iter286000Sample[] {
   const samples: Iter286000Sample[] = [];
   const basePath = 'iter_286000';
@@ -67,6 +89,37 @@ export function generateIter286000Data(): Iter286000Sample[] {
         orig: `${basePath}/conv_timbre/${i}_orig.wav`,
         ref: `${basePath}/conv_timbre/${i}_ref.wav`,
         recon: `${basePath}/conv_timbre/${i}_recon.wav`,
+      },
+    });
+  }
+  
+  return samples;
+}
+
+export function generateIter140000Data(): Iter140000Sample[] {
+  const samples: Iter140000Sample[] = [];
+  const basePath = 'iter_140000';
+  
+  for (let i = 0; i < 16; i++) {
+    samples.push({
+      id: i,
+      conv_adsr: {
+        gt: `${basePath}/conv_adsr/${i.toString().padStart(2, '0')}_gt.wav`,
+        orig: `${basePath}/conv_adsr/${i.toString().padStart(2, '0')}_orig.wav`,
+        ref: `${basePath}/conv_adsr/${i.toString().padStart(2, '0')}_ref.wav`,
+        recon: `${basePath}/conv_adsr/${i.toString().padStart(2, '0')}_recon.wav`,
+      },
+      conv_both: {
+        gt: `${basePath}/conv_both/${i.toString().padStart(2, '0')}_gt.wav`,
+        orig: `${basePath}/conv_both/${i.toString().padStart(2, '0')}_orig.wav`,
+        ref: `${basePath}/conv_both/${i.toString().padStart(2, '0')}_ref.wav`,
+        recon: `${basePath}/conv_both/${i.toString().padStart(2, '0')}_recon.wav`,
+      },
+      conv_timbre: {
+        gt: `${basePath}/conv_timbre/${i.toString().padStart(2, '0')}_gt.wav`,
+        orig: `${basePath}/conv_timbre/${i.toString().padStart(2, '0')}_orig.wav`,
+        ref: `${basePath}/conv_timbre/${i.toString().padStart(2, '0')}_ref.wav`,
+        recon: `${basePath}/conv_timbre/${i.toString().padStart(2, '0')}_recon.wav`,
       },
     });
   }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Music, RefreshCw, CheckCircle, FileAudio } from 'lucide-react';
 import AudioPlayer from './AudioPlayer';
 
-interface Iter286000Sample {
+interface Iter140000Sample {
   id: number;
   conv_adsr: {
     gt: string;
@@ -24,11 +24,11 @@ interface Iter286000Sample {
   };
 }
 
-interface Iter286000TableProps {
-  samples: Iter286000Sample[];
+interface Iter140000TableProps {
+  samples: Iter140000Sample[];
 }
 
-const Iter286000Table: React.FC<Iter286000TableProps> = ({ samples }) => {
+const Iter140000Table: React.FC<Iter140000TableProps> = ({ samples }) => {
   const [selectedCategory, setSelectedCategory] = useState<'conv_adsr' | 'conv_both' | 'conv_timbre'>('conv_adsr');
 
   const getCategoryInfo = (category: string) => {
@@ -66,14 +66,14 @@ const Iter286000Table: React.FC<Iter286000TableProps> = ({ samples }) => {
     <div className="space-y-6">
       {/* Category Selector */}
       <div className="flex justify-center mb-8">
-        <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl p-2 flex gap-2 border border-purple-400/30 backdrop-blur-sm">
+        <div className="bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-xl p-2 flex gap-2 border border-orange-400/30 backdrop-blur-sm">
           {(['conv_adsr', 'conv_both', 'conv_timbre'] as const).map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
                 selectedCategory === category
-                  ? 'bg-gradient-to-r from-purple-500 to-blue-600 text-white shadow-lg'
+                  ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-lg'
                   : 'text-white/90 hover:text-white hover:bg-white/20'
               }`}
             >
@@ -135,7 +135,7 @@ const Iter286000Table: React.FC<Iter286000TableProps> = ({ samples }) => {
                   className="hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover-scale transition-all duration-300 group"
                 >
                   <td className="px-6 py-6 text-center">
-                    <div className="w-8 h-8 mx-auto bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg">
+                    <div className="w-8 h-8 mx-auto bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg">
                       {sample.id}
                     </div>
                   </td>
@@ -181,4 +181,4 @@ const Iter286000Table: React.FC<Iter286000TableProps> = ({ samples }) => {
   );
 };
 
-export default Iter286000Table; 
+export default Iter140000Table; 
