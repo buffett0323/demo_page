@@ -67,7 +67,7 @@ export interface Iter140000Sample {
 
 export function generateIter286000Data(): Iter286000Sample[] {
   const samples: Iter286000Sample[] = [];
-  const basePath = 'iter_286000';
+  const basePath = 'iter_176000';
   
   for (let i = 0; i < 8; i++) {
     samples.push({
@@ -98,9 +98,9 @@ export function generateIter286000Data(): Iter286000Sample[] {
 
 export function generateIter140000Data(): Iter140000Sample[] {
   const samples: Iter140000Sample[] = [];
-  const basePath = 'iter_140000';
+  const basePath = 'iter_176000_0723_add';
   
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < 8; i++) {
     samples.push({
       id: i,
       conv_adsr: {

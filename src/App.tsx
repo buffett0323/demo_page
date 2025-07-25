@@ -1,25 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Headphones, Music, ArrowLeft, Sparkles, Zap } from 'lucide-react';
-import AudioTable from './components/AudioTable';
-import Iter286000Table from './components/Iter286000Table';
+import { Headphones, ArrowLeft, Zap, Music, Sparkles } from 'lucide-react';
 import Iter140000Table from './components/Iter140000Table';
-import { generateSampleData, generateTestData, generateIter286000Data, generateIter140000Data, Iter286000Sample, Iter140000Sample } from './utils/audioUtils';
-import { AudioSample } from './types/audio';
+import { generateIter140000Data, Iter140000Sample } from './utils/audioUtils';
 
 function App() {
-  const [samples, setSamples] = useState<AudioSample[]>([]);
-  const [testSamples, setTestSamples] = useState<AudioSample[]>([]);
-  const [iter286000Samples, setIter286000Samples] = useState<Iter286000Sample[]>([]);
   const [iter140000Samples, setIter140000Samples] = useState<Iter140000Sample[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<'main' | 'old' | 'new' | 'iter140000'>('main');
+  const [currentPage, setCurrentPage] = useState<'main' | 'iter140000' | 'iter176000' | 'iter182000'>('main');
 
   useEffect(() => {
     // Simulate loading time for better UX
     const timer = setTimeout(() => {
-      setSamples(generateSampleData());
-      setTestSamples(generateTestData());
-      setIter286000Samples(generateIter286000Data());
       setIter140000Samples(generateIter140000Data());
       setLoading(false);
     }, 500);
@@ -47,7 +38,7 @@ function App() {
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="p-4 bg-white/20 rounded-full backdrop-blur-sm">
-                <Music className="w-10 h-10 text-white" />
+                <Zap className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
                 Zero-shot Style Transfer
@@ -59,60 +50,9 @@ function App() {
           </div>
 
           {/* Page Selection Cards */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-            {/* Old Page Card */}
-            <div 
-              className="bg-gradient-to-br from-blue-500/30 to-purple-600/30 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-blue-400/50 backdrop-blur-sm"
-              onClick={() => setCurrentPage('old')}
-            >
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Music className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">0618 w/o ADSR</h3>
-                <p className="text-white/80 mb-6 leading-relaxed">
-                  Access the original audio evaluation interface with comprehensive validation results and testing data.
-                </p>
-                <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-lg p-4 border border-blue-400/30">
-                  <p className="text-white text-sm font-medium">
-                    <strong className="text-white">Features:</strong><br/>
-                    • Audio comparison tables<br/>
-                    • Loss metrics visualization<br/>
-                    • MIDI visualization<br/>
-                    • Ground truth comparison
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* New Page Card */}
-            <div 
-              className="bg-gradient-to-br from-green-500/30 to-teal-600/30 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-green-400/50 backdrop-blur-sm"
-              onClick={() => setCurrentPage('new')}
-            >
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Sparkles className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">0719 w/ ADSR</h3>
-                <p className="text-white/80 mb-6 leading-relaxed">
-                  Trained 2.1 days for 286000 iterations in sinica NVIDIA RTX 6000. 
-                  The results involve three conversion methods: ADSR, Timbre, and Both(ADSR+Timbre) conversions.
-                </p>
-                <div className="bg-gradient-to-br from-green-500/20 to-teal-600/20 rounded-lg p-4 border border-green-400/30">
-                  <p className="text-white text-sm font-medium">
-                    <strong className="text-white">Features:</strong><br/>
-                    • Three conversion methods<br/>
-                    • Audio comparison tables<br/>
-                    • Interactive category switching<br/>
-                    • Ground truth comparison
-                  </p>
-                </div>
-              </div>
-            </div>
-
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-16">
             {/* Iter 140000 Page Card */}
-            <div 
+            {/* <div 
               className="bg-gradient-to-br from-orange-500/30 to-red-600/30 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-orange-400/50 backdrop-blur-sm"
               onClick={() => setCurrentPage('iter140000')}
             >
@@ -131,6 +71,56 @@ function App() {
                     • Interactive category switching<br/>
                     • Ground truth comparison<br/>
                     • Audio Waveform Visualization
+                  </p>
+                </div>
+              </div>
+            </div> */}
+
+            {/* Iter 176000 Page Card */}
+            <div 
+              className="bg-gradient-to-br from-blue-500/30 to-purple-600/30 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-blue-400/50 backdrop-blur-sm"
+              onClick={() => setCurrentPage('iter176000')}
+            >
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Music className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">0723 Iter 176000 Add</h3>
+                <p className="text-white/80 mb-6 leading-relaxed">
+                  Results from iteration 176000 with additive approach for ADSR integration.
+                </p>
+                <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-lg p-4 border border-blue-400/30">
+                  <p className="text-white text-sm font-medium">
+                    <strong className="text-white">Features:</strong><br/>
+                    • Audio comparison tables<br/>
+                    • Interactive category switching<br/>
+                    • Ground truth comparison<br/>
+                    • Additive ADSR method
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Iter 182000 Page Card */}
+            <div 
+              className="bg-gradient-to-br from-green-500/30 to-teal-600/30 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-green-400/50 backdrop-blur-sm"
+              onClick={() => setCurrentPage('iter182000')}
+            >
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Sparkles className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">0723 Iter 182000 Direct</h3>
+                <p className="text-white/80 mb-6 leading-relaxed">
+                  Results from iteration 182000 with direct approach for ADSR integration.
+                </p>
+                <div className="bg-gradient-to-br from-green-500/20 to-teal-600/20 rounded-lg p-4 border border-green-400/30">
+                  <p className="text-white text-sm font-medium">
+                    <strong className="text-white">Features:</strong><br/>
+                    • Audio comparison tables<br/>
+                    • Interactive category switching<br/>
+                    • Ground truth comparison<br/>
+                    • Direct ADSR method
                   </p>
                 </div>
               </div>
@@ -156,133 +146,7 @@ function App() {
     );
   }
 
-  // Old page (original functionality)
-  if (currentPage === 'old') {
-    return (
-      <div className="min-h-screen gradient-bg">
-        <div className="container mx-auto px-4 py-8 max-w-7xl">
-          {/* Back Button */}
-          <div className="mb-6">
-            <button
-              onClick={() => setCurrentPage('main')}
-              className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200 group"
-            >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <span className="text-lg font-medium">Back to Main Menu</span>
-            </button>
-          </div>
 
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
-                <Music className="w-8 h-8 text-white" />
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
-                0618 w/o ADSR
-              </h1>
-            </div>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-              Compare audio samples with reference, conversion results, and ground truth recordings.
-              Further details and code can be found in the <a href="https://github.com/buffett0323/query_ss.git" className="text-black hover:underline">Buffett's GitHub repository</a>
-            </p>
-          </div>
-
-          {/* Main Table Container */}
-          <div className="space-y-16">
-            {/* Original Results Table */}
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-6 text-center">
-                Validation Results
-              </h2>
-              <AudioTable samples={samples} />
-            </div>
-
-            {/* Testing Results Table */}
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-6 text-center">
-                Testing Results
-              </h2>
-              <AudioTable samples={testSamples} />
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center mt-12">
-            <div className="flex items-center justify-center gap-2 text-white/80">
-              <Headphones className="w-5 h-5" />
-              <span className="text-lg font-medium">
-                Audio Synthesizer Style Transfer • Use headphones for the best experience
-              </span>
-            </div>
-            <div className="mt-4 text-white/60">
-              <p className="text-sm">
-                Built by Buffett Liu
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // New page (0719_work) - showing iter_286000 data
-  if (currentPage === 'new') {
-    return (
-      <div className="min-h-screen gradient-bg">
-        <div className="container mx-auto px-4 py-8 max-w-7xl">
-          {/* Back Button */}
-          <div className="mb-6">
-            <button
-              onClick={() => setCurrentPage('main')}
-              className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200 group"
-            >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <span className="text-lg font-medium">Back to Main Menu</span>
-            </button>
-          </div>
-
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
-                0719 w/ ADSR, onset detection re-align
-              </h1>
-            </div>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-              Please choose a conversion method: ADSR, Timbre, and conversion.
-              Each sample includes original, reference, reconstruction, and ground truth audio files.
-              The model disentangles timbre, content, and the ADSR of the audio. For example, 
-              in conv_adsr, the reconstruction audio takes orig_audio's timbre and content, and takes ref_audio's ADSR.
-            </p>
-          </div>
-
-          {/* Main Table Container */}
-          <div className="space-y-16">
-            <Iter286000Table samples={iter286000Samples} />
-          </div>
-
-          {/* Footer */}
-          <div className="text-center mt-12">
-            <div className="flex items-center justify-center gap-2 text-white/80">
-              <Headphones className="w-5 h-5" />
-              <span className="text-lg font-medium">
-                Audio Synthesizer Style Transfer • Use headphones for the best experience
-              </span>
-            </div>
-            <div className="mt-4 text-white/60">
-              <p className="text-sm">
-                Built by Buffett Liu
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   // Iter 140000 page
   if (currentPage === 'iter140000') {
@@ -313,6 +177,118 @@ function App() {
             <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               Compare audio samples across different conversion methods: ADSR, Both, and Timbre conversions.
               Each sample includes original, reference, reconstruction, and ground truth audio files.
+            </p>
+          </div>
+
+          {/* Main Table Container */}
+          <div className="space-y-16">
+            <Iter140000Table samples={iter140000Samples} />
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-12">
+            <div className="flex items-center justify-center gap-2 text-white/80">
+              <Headphones className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                Audio Synthesizer Style Transfer • Use headphones for the best experience
+              </span>
+            </div>
+            <div className="mt-4 text-white/60">
+              <p className="text-sm">
+                Built by Buffett Liu
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Iter 176000 page
+  if (currentPage === 'iter176000') {
+    return (
+      <div className="min-h-screen gradient-bg">
+        <div className="container mx-auto px-4 py-8 max-w-7xl">
+          {/* Back Button */}
+          <div className="mb-6">
+            <button
+              onClick={() => setCurrentPage('main')}
+              className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200 group"
+            >
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-lg font-medium">Back to Main Menu</span>
+            </button>
+          </div>
+
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
+                <Music className="w-8 h-8 text-white" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
+                Iteration 176000 Results (Additive)
+              </h1>
+            </div>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+              Results from iteration 176000 using additive approach for ADSR integration.
+              Compare audio samples across different conversion methods.
+            </p>
+          </div>
+
+          {/* Main Table Container */}
+          <div className="space-y-16">
+            <Iter140000Table samples={iter140000Samples} />
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-12">
+            <div className="flex items-center justify-center gap-2 text-white/80">
+              <Headphones className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                Audio Synthesizer Style Transfer • Use headphones for the best experience
+              </span>
+            </div>
+            <div className="mt-4 text-white/60">
+              <p className="text-sm">
+                Built by Buffett Liu
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Iter 182000 page
+  if (currentPage === 'iter182000') {
+    return (
+      <div className="min-h-screen gradient-bg">
+        <div className="container mx-auto px-4 py-8 max-w-7xl">
+          {/* Back Button */}
+          <div className="mb-6">
+            <button
+              onClick={() => setCurrentPage('main')}
+              className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200 group"
+            >
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-lg font-medium">Back to Main Menu</span>
+            </button>
+          </div>
+
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
+                Iteration 182000 Results (Direct)
+              </h1>
+            </div>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+              Results from iteration 182000 using direct approach for ADSR integration.
+              Compare audio samples across different conversion methods.
             </p>
           </div>
 
