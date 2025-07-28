@@ -65,6 +65,25 @@ export interface Iter140000Sample {
   };
 }
 
+export interface Exp0725Sample {
+  id: string;
+  title: string;
+  short2long: {
+    orig: string;
+    ref: string;
+    conv_both_enc_v1: string;
+    conv_both_onset_only: string;
+    gt_both: string;
+  };
+  long2short: {
+    orig: string;
+    ref: string;
+    conv_both_enc_v1: string;
+    conv_both_onset_only: string;
+    gt_both: string;
+  };
+}
+
 export function generateIter286000Data(): Iter286000Sample[] {
   const samples: Iter286000Sample[] = [];
   const basePath = 'iter_176000';
@@ -125,6 +144,29 @@ export function generateIter140000Data(): Iter140000Sample[] {
   }
   
   return samples;
+}
+
+export function generateExp0725Data(): Exp0725Sample[] {
+  return [
+    {
+      id: 'exp0725_001',
+      title: '0725 Experiment Sample',
+      short2long: {
+        orig: '/0725_exp/short2long_orig.wav',
+        ref: '/0725_exp/short2long_ref.wav',
+        conv_both_enc_v1: '/0725_exp/short2long_conv_both_enc_v1.wav',
+        conv_both_onset_only: '/0725_exp/short2long_conv_both_onset_only.wav',
+        gt_both: '/0725_exp/short2long_gt_both_enc_v1.wav',
+      },
+      long2short: {
+        orig: '/0725_exp/long2short_orig.wav',
+        ref: '/0725_exp/long2short_ref.wav',
+        conv_both_enc_v1: '/0725_exp/long2short_conv_both_enc_v1.wav',
+        conv_both_onset_only: '/0725_exp/long2short_conv_both_onset_only.wav',
+        gt_both: '/0725_exp/long2short_gt_both_enc_v1.wav',
+      },
+    },
+  ];
 }
 
 export function generateSampleData(): AudioSample[] {
